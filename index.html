@@ -34,6 +34,7 @@ html[data-theme="light"]{
   --accent-soft:#EDF1F8;
   --on-accent:#FFFFFF;
   --red:#B3372B;
+  --green:#12864F;
   --shadow:0 1px 2px rgba(23,25,28,.05);
   --shadow-lift:0 2px 6px rgba(23,25,28,.07),0 10px 26px rgba(23,25,28,.07);
   --shine:rgba(23,25,28,.04);
@@ -57,6 +58,7 @@ html[data-theme="dark"]{
   --accent-soft:#141C2C;
   --on-accent:#FFFFFF;
   --red:#FF6B62;
+  --green:#3DD68C;
   --shadow:0 1px 2px rgba(0,0,0,.45);
   --shadow-lift:0 10px 28px rgba(0,0,0,.55);
   --shine:rgba(255,255,255,.07);
@@ -202,7 +204,7 @@ main{padding-top:26px}
 .view.on{display:block}
 
 /* ============ SHARED ============ */
-.sect{font-size:11.5px;font-weight:600;color:var(--dim);margin:28px 0 11px;display:flex;align-items:center;gap:10px;letter-spacing:.01em}
+.sect{font-size:11.5px;font-weight:600;color:var(--dim);margin:22px 0 9px;display:flex;align-items:center;gap:10px;letter-spacing:.01em}
 .sect:first-child{margin-top:0}
 .sect .n{color:var(--dimmer);font-size:11.5px;font-weight:500}
 .sect::after{content:'';flex:1;height:1px;background:var(--line)}
@@ -290,7 +292,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 /* ============ TASK ============ */
 .list{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .task{
-  display:flex;align-items:flex-start;gap:13px;padding:14px 18px;
+  display:flex;align-items:center;gap:10px;padding:6px 14px;
   background:transparent;transition:background .16s,opacity .3s;
 }
 .task+.task{border-top:1px solid var(--line-2)}
@@ -298,25 +300,30 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .task.late{box-shadow:inset 2px 0 0 var(--red)}
 .task.done{opacity:.4}
 .check{
-  width:23px;height:23px;border:2px solid var(--dimmer);border-radius:8px;cursor:pointer;
-  flex-shrink:0;margin-top:1px;display:grid;place-items:center;background:transparent;padding:0;
+  width:17px;height:17px;border:1.5px solid var(--dimmer);border-radius:5px;cursor:pointer;
+  flex-shrink:0;display:grid;place-items:center;background:transparent;padding:0;
   transition:border-color .18s,background .25s,transform .18s;
 }
 .check:hover{border-color:var(--accent);transform:scale(1.12)}
 .check:active{transform:scale(.88)}
-.check svg{width:13px;height:13px;display:block}
+.check svg{width:10px;height:10px;display:block}
 .check svg path{stroke:#FFFFFF;stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:22;stroke-dashoffset:22}
 .check.on{background:var(--accent);border-color:var(--accent)}
 .check.on svg path{stroke-dashoffset:0;transition:stroke-dashoffset .3s cubic-bezier(.5,0,.2,1) .05s}
 .t-body{flex:1;min-width:0}
-.t-title{font-size:15.5px;font-weight:600;word-break:break-word;line-height:1.42;position:relative;display:inline}
+.t-row{display:flex;align-items:center;gap:10px;min-width:0}
+.t-title{
+  font-size:13.5px;font-weight:500;line-height:1.45;position:relative;cursor:pointer;
+  flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.t-title:hover{text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--dimmer)}
 .task.done .t-title{color:var(--dim)}
-.task.done .t-title::after{content:'';position:absolute;left:0;top:52%;height:2px;width:100%;background:var(--dim);animation:strike .28s cubic-bezier(.4,0,.2,1) forwards}
+.task.done .t-title{text-decoration:line-through;text-decoration-thickness:1.5px}
 @keyframes strike{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
-.t-meta{display:flex;align-items:center;gap:9px;margin-top:9px;flex-wrap:wrap}
-.chip{font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:5px;display:inline-flex;align-items:center;gap:6px}
+.t-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.chip{font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
 .chip.area{background:var(--panel-2);color:var(--dim)}
-.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .chip.due{background:var(--panel-2);color:var(--dim)}
 .chip.due.late{
   background:var(--red);color:#fff;text-transform:uppercase;
@@ -331,10 +338,13 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .chip.prio.alta{background:var(--txt);color:var(--bg)}
 .chip.prio.media{background:var(--panel-2);color:var(--dim)}
 .chip.prio.baja{background:transparent;color:var(--dimmer);border:1px solid var(--line)}
-.t-notes{font-size:14px;color:var(--dim);margin-top:9px;white-space:pre-wrap;line-height:1.55}
+.t-notes{
+  font-size:12px;color:var(--dimmer);margin-top:1px;line-height:1.4;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
 .t-acts{display:flex;gap:3px;flex-shrink:0;align-items:center;opacity:.45;transition:opacity .18s}
 .task:hover .t-acts,.dcard:hover .t-acts{opacity:1}
-.mini{background:transparent;border:none;color:var(--dim);cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;padding:6px 9px;border-radius:8px;line-height:1;transition:.15s}
+.mini{background:transparent;border:none;color:var(--dim);cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:600;padding:4px 6px;border-radius:5px;line-height:1;transition:.15s}
 .mini:hover{color:var(--txt);background:var(--panel-2)}
 .mini.del:hover{color:var(--red)}
 
@@ -354,17 +364,17 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .frow input:focus{border:none;background:transparent;box-shadow:none}
 
 /* ============ DELEG ============ */
-.dcard{background:transparent;padding:15px 18px;transition:background .16s}
+.dcard{background:transparent;padding:7px 14px;transition:background .16s}
 .dcard+.dcard{border-top:1px solid var(--line-2)}
 .dcard:hover{background:var(--panel-2)}
 .dcard.overdue{box-shadow:inset 2px 0 0 var(--red)}
 .dcard.done{opacity:.4}
-.d-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.d-what{font-size:15.5px;font-weight:600;line-height:1.42;word-break:break-word}
-.d-who{font-size:13.5px;color:var(--dim);margin-top:7px;font-weight:600;display:flex;align-items:center;gap:8px}
-.avatar{width:23px;height:23px;border-radius:50%;background:var(--txt);color:var(--bg);display:grid;place-items:center;font-size:10.5px;font-weight:800;flex-shrink:0}
-.d-meta{display:flex;gap:9px;align-items:center;margin-top:12px;flex-wrap:wrap}
-.status-sel{border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;background:var(--panel-2);color:var(--dim)}
+.d-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.d-what{font-size:13.5px;font-weight:500;line-height:1.45;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.d-who{font-size:12px;color:var(--dim);font-weight:500;display:inline-flex;align-items:center;gap:6px;flex-shrink:0}
+.avatar{width:18px;height:18px;border-radius:50%;background:var(--txt);color:var(--bg);display:grid;place-items:center;font-size:9px;font-weight:800;flex-shrink:0}
+.d-meta{display:inline-flex;gap:6px;align-items:center;flex-shrink:0}
+.status-sel{border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;background:var(--panel-2);color:var(--dim)}
 .status-sel.progreso{border-color:var(--accent);color:var(--accent)}
 .status-sel.trabado{border-color:var(--red);color:var(--red)}
 .status-sel.listo{background:var(--txt);color:var(--bg);border-color:var(--txt)}
@@ -453,7 +463,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .gcal-state{font-size:13px;color:var(--dim);font-weight:500;display:flex;align-items:center;gap:8px}
 .gcal-state::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--dimmer);flex-shrink:0}
 .gcal-state.ok{color:var(--txt)}
-.gcal-state.ok::before{background:var(--green,#1a9e5f)}
+.gcal-state.ok::before{background:var(--green)}
 .gcal-state.err{color:var(--red)}
 .gcal-state.err::before{background:var(--red)}
 .ev{display:flex;align-items:flex-start;gap:13px;padding:12px 18px;transition:background .16s}
@@ -507,15 +517,15 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .fline.open{border-bottom:1px solid var(--focus-line)}
 
 /* ============ RECURRENTES ============ */
-.rrow{display:flex;align-items:center;gap:13px;padding:13px 18px;background:transparent;transition:background .16s}
+.rrow{display:flex;align-items:center;gap:10px;padding:7px 14px;background:transparent;transition:background .16s}
 .rrow+.rrow{border-top:1px solid var(--line-2)}
 .rrow:hover{background:var(--panel-2)}
 .rrow.overdue{box-shadow:inset 2px 0 0 var(--red)}
 .rrow.got{opacity:.45}
-.r-body{flex:1;min-width:0}
-.r-name{font-size:14.5px;font-weight:600;line-height:1.4;word-break:break-word}
+.r-body{flex:1;min-width:0;display:flex;align-items:center;gap:10px}
+.r-name{font-size:13.5px;font-weight:500;line-height:1.45;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rrow.got .r-name{text-decoration:line-through;color:var(--dim)}
-.r-meta{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
+.r-meta{display:inline-flex;align-items:center;gap:6px;flex-shrink:0}
 .chip.wait{background:var(--panel-2);color:var(--dim)}
 .chip.wait.late{background:var(--red);color:#fff;text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;font-weight:700}
 .chip.wait.now{background:var(--accent);color:#fff;text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;font-weight:700}
@@ -565,6 +575,27 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .note b{color:var(--txt)}
 code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:13px;font-family:ui-monospace,Menlo,monospace}
 
+/* ============ MODAL ============ */
+.modal{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(2px);animation:fadeIn .16s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal-box{
+  position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  width:100%;max-width:520px;max-height:88vh;display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);animation:pop .2s cubic-bezier(.2,1.2,.4,1);
+}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.modal-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700;
+}
+.modal-x{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:14px;padding:4px 7px;border-radius:6px;font-family:inherit}
+.modal-x:hover{color:var(--txt);background:var(--panel-2)}
+.modal-body{padding:18px;overflow-y:auto}
+.modal-foot{display:flex;align-items:center;gap:8px;padding:13px 18px;border-top:1px solid var(--line)}
+.modal-foot .btn.ghost#modalDel{color:var(--red)}
+.modal-foot .btn.ghost#modalDel:hover{background:rgba(179,55,43,.1)}
+
 /* ============ TOAST ============ */
 #toast{
   position:fixed;left:50%;bottom:28px;transform:translate(-50%,90px) scale(.9);
@@ -601,6 +632,9 @@ code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padd
   .qadd .btn{width:100%}
   .head-ctrls{width:100%;justify-content:space-between}
   .t-acts{opacity:1}
+  .t-row{flex-wrap:wrap;gap:4px}
+  .t-title{white-space:normal;flex:1 0 100%}
+  .t-meta{flex-wrap:wrap}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -937,6 +971,23 @@ code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padd
 </section>
 
 </main>
+
+<div class="modal" id="modal" style="display:none">
+  <div class="modal-bg" onclick="closeModal()"></div>
+  <div class="modal-box">
+    <div class="modal-head">
+      <span id="modalTitle">Editar</span>
+      <button class="modal-x" onclick="closeModal()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn ghost" id="modalDel" onclick="modalDelete()">Borrar</button>
+      <span style="flex:1"></span>
+      <button class="btn ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn" onclick="modalSave()">Guardar</button>
+    </div>
+  </div>
+</div>
 
 <div id="toast"></div>
 <div id="confetti"></div>
@@ -1591,14 +1642,15 @@ function recurHTML(r,compact){
   return '<div class="rrow '+st.cell+'">'+
     '<button class="check'+(got?' on':'')+'" onclick="toggleRecur(\''+r.id+'\')" aria-label="Marcar recibido">'+CHECK_SVG+'</button>'+
     '<div class="r-body">'+
-      '<div class="r-name">'+esc(r.name)+'</div>'+
+      '<div class="r-name"'+(compact?'':' onclick="openModal(\'recur\',\''+r.id+'\')" style="cursor:pointer"')+'>'+esc(r.name)+'</div>'+
       '<div class="r-meta">'+
         '<span class="chip area"><span class="avatar" style="width:16px;height:16px;font-size:8.5px">'+esc(initials(r.who))+'</span>'+esc(r.who)+'</span>'+
         '<span class="chip wait '+st.cls+'">'+st.txt+'</span>'+
         (S.ws==='todo'?'<span class="chip area"><span class="dot" style="background:'+a.v+'"></span>'+esc(a.name)+'</span>':'')+
       '</div>'+
     '</div>'+
-    (compact?'':'<div class="t-acts"><button class="mini del" onclick="delRecur(\''+r.id+'\')" title="Quitar">✕</button></div>')+
+    (compact?'':'<div class="t-acts"><button class="mini" onclick="openModal(\'recur\',\''+r.id+'\')" title="Editar">Editar</button>'+
+      '<button class="mini del" onclick="delRecur(\''+r.id+'\')" title="Quitar">✕</button></div>')+
   '</div>';
 }
 function renderRecur(){
@@ -1965,12 +2017,93 @@ function delTask(id){
   if(!confirm('¿Borrar "'+x.title+'"?'))return;
   S.tasks=S.tasks.filter(t=>t.id!==id);save();render();toast('Borrada');
 }
-function editTask(id){
-  const x=S.tasks.find(t=>t.id===id);if(!x)return;
-  const n=prompt('Editar tarea:',x.title);
-  if(n===null)return;
-  if(n.trim()){x.title=n.trim();save();render()}
+let modalKind=null, modalId=null;
+function areaOpts(sel){
+  return AREAS.map(a=>'<option value="'+a.id+'"'+(sel===a.id?' selected':'')+'>'+a.name+'</option>').join('');
 }
+function openModal(kind,id){
+  modalKind=kind;modalId=id;
+  const box=document.getElementById('modalBody');
+  if(kind==='task'){
+    const x=S.tasks.find(t=>t.id===id);if(!x)return;
+    document.getElementById('modalTitle').textContent='Editar tarea';
+    box.innerHTML=
+      '<div class="fgrid">'+
+made('m_title','Tarea','<input id="m_title" value="'+esc(x.title)+'">',true)+
+made('m_area','Negocio','<select id="m_area">'+areaOpts(x.area)+'</select>')+
+made('m_prio','Prioridad','<select id="m_prio">'+
+  ['alta','media','baja'].map(p=>'<option value="'+p+'"'+(x.prio===p?' selected':'')+'>'+
+    p.charAt(0).toUpperCase()+p.slice(1)+'</option>').join('')+'</select>')+
+made('m_due','Deadline','<input type="date" id="m_due" value="'+(x.due||'')+'">')+
+made('m_notes','Notas','<textarea id="m_notes" style="min-height:90px">'+esc(x.notes||'')+'</textarea>',true)+
+      '</div>';
+  }else if(kind==='deleg'){
+    const x=S.deleg.find(d=>d.id===id);if(!x)return;
+    document.getElementById('modalTitle').textContent='Editar seguimiento';
+    box.innerHTML=
+      '<div class="fgrid">'+
+made('m_what','Qué delegué','<input id="m_what" value="'+esc(x.what)+'">',true)+
+made('m_who','A quién','<input id="m_who" value="'+esc(x.who)+'">')+
+made('m_area','Negocio','<select id="m_area">'+areaOpts(x.area)+'</select>')+
+made('m_follow','Cobrar el','<input type="date" id="m_follow" value="'+(x.follow||'')+'">')+
+made('m_status','Estado','<select id="m_status">'+
+  STATUSES.map(st=>'<option value="'+st.id+'"'+(x.status===st.id?' selected':'')+'>'+st.name+'</option>').join('')+'</select>')+
+      '</div>';
+  }else if(kind==='recur'){
+    const x=S.recur.find(r=>r.id===id);if(!x)return;
+    document.getElementById('modalTitle').textContent='Editar entrega';
+    box.innerHTML=
+      '<div class="fgrid">'+
+made('m_name','Qué me tiene que mandar','<input id="m_name" value="'+esc(x.name)+'">',true)+
+made('m_who','Quién','<input id="m_who" value="'+esc(x.who)+'">')+
+made('m_day','Día esperado','<select id="m_day">'+
+  DIASSEM.map((dd,i)=>'<option value="'+i+'"'+((x.day||0)===i?' selected':'')+'>'+dd+'</option>').join('')+'</select>')+
+made('m_area','Negocio','<select id="m_area">'+areaOpts(x.area)+'</select>')+
+      '</div>';
+  }
+  document.getElementById('modal').style.display='';
+  setTimeout(()=>{const f=box.querySelector('input,textarea');if(f){f.focus();f.select&&f.select()}},40);
+}
+function made(id,label,field,full){
+  return '<div class="field'+(full?' full':'')+'"><label class="flabel" for="'+id+'">'+label+'</label>'+field+'</div>';
+}
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+  modalKind=null;modalId=null;
+}
+function gv(id){const e=document.getElementById(id);return e?e.value:''}
+function modalSave(){
+  if(modalKind==='task'){
+    const x=S.tasks.find(t=>t.id===modalId);if(!x)return;
+    const t=gv('m_title').trim();
+    if(!t){toast('La tarea necesita título');return}
+    x.title=t;x.area=gv('m_area');x.prio=gv('m_prio');x.due=gv('m_due')||'';x.notes=gv('m_notes').trim();
+  }else if(modalKind==='deleg'){
+    const x=S.deleg.find(d=>d.id===modalId);if(!x)return;
+    const t=gv('m_what').trim();
+    if(!t){toast('Falta la descripción');return}
+    x.what=t;x.who=gv('m_who').trim()||'Sin asignar';x.area=gv('m_area');
+    x.follow=gv('m_follow')||'';x.status=gv('m_status');
+  }else if(modalKind==='recur'){
+    const x=S.recur.find(r=>r.id===modalId);if(!x)return;
+    const t=gv('m_name').trim();
+    if(!t){toast('Falta la descripción');return}
+    x.name=t;x.who=gv('m_who').trim()||'Sin asignar';x.day=parseInt(gv('m_day'),10)||0;x.area=gv('m_area');
+  }
+  save();lastHTML={};render();closeModal();toast('Guardado');
+}
+function modalDelete(){
+  const k=modalKind,id=modalId;
+  closeModal();
+  if(k==='task')delTask(id);
+  else if(k==='deleg')delDeleg(id);
+  else if(k==='recur')delRecur(id);
+}
+function editTask(id){openModal('task',id)}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&modalKind)closeModal();
+  if((e.key==='Enter')&&modalKind&&(e.metaKey||e.ctrlKey))modalSave();
+});
 function bumpTask(id){
   const x=S.tasks.find(t=>t.id===id);if(!x)return;
   const base=x.due&&diffDays(x.due,todayStr())>0?parseD(x.due):new Date();
@@ -1991,13 +2124,15 @@ function taskHTML(t){
   return '<div class="'+cls+'">'+
     '<button class="check'+(t.done?' on':'')+'" onclick="toggleTask(\''+t.id+'\')" aria-label="Cerrar tarea">'+CHECK_SVG+'</button>'+
     '<div class="t-body">'+
-      '<div class="t-title">'+highlight(t.title)+'</div>'+
-      '<div class="t-meta">'+
-        (showArea?'<span class="chip area"><span class="dot" style="background:'+a.v+'"></span>'+esc(a.name)+'</span>':'')+
-        (ds?'<span class="chip due '+ds.cls+'">'+ds.txt+'</span>':'')+
-        farDate+
-        (t.done?'':'<span class="chip prio '+t.prio+'">'+t.prio.charAt(0).toUpperCase()+t.prio.slice(1)+'</span>')+
-        (t.done&&t.doneAt?'<span class="chip done">Cerrada '+fmtDue(t.doneAt).toLowerCase()+'</span>':'')+
+      '<div class="t-row">'+
+        '<span class="t-title" onclick="openModal(\'task\',\''+t.id+'\')" title="Editar">'+highlight(t.title)+'</span>'+
+        '<span class="t-meta">'+
+          (showArea?'<span class="chip area"><span class="dot" style="background:'+a.v+'"></span>'+esc(a.name)+'</span>':'')+
+          (ds?'<span class="chip due '+ds.cls+'">'+ds.txt+'</span>':'')+
+          farDate+
+          (t.done?'':'<span class="chip prio '+t.prio+'">'+t.prio.charAt(0).toUpperCase()+t.prio.slice(1)+'</span>')+
+          (t.done&&t.doneAt?'<span class="chip done">Cerrada '+fmtDue(t.doneAt).toLowerCase()+'</span>':'')+
+        '</span>'+
       '</div>'+
       (t.notes?'<div class="t-notes">'+highlight(t.notes)+'</div>':'')+
     '</div>'+
@@ -2046,20 +2181,19 @@ function delegHTML(d){
   const showArea=S.ws==='todo';
   return '<div class="'+cls+'">'+
     '<div class="d-top">'+
-      '<div style="flex:1;min-width:0">'+
-        '<div class="d-what">'+esc(d.what)+'</div>'+
-        '<div class="d-who"><span class="avatar">'+esc(initials(d.who))+'</span>'+esc(d.who)+'</div>'+
-      '</div>'+
+      '<span class="d-what" onclick="openModal(\'deleg\',\''+d.id+'\')" style="cursor:pointer">'+esc(d.what)+'</span>'+
+      '<span class="d-who"><span class="avatar">'+esc(initials(d.who))+'</span>'+esc(d.who)+'</span>'+
+      '<span class="d-meta">'+
+        '<select class="status-sel '+d.status+'" onchange="setStatus(\''+d.id+'\',this.value)">'+st+'</select>'+
+        (showArea?'<span class="chip area"><span class="dot" style="background:'+a.v+'"></span>'+esc(a.name)+'</span>':'')+
+        (fs?'<span class="chip due '+fs.cls+'">'+(fs.cls==='late'?fs.txt:(fs.cls==='today'?'Cobrar hoy':'Cobrar · '+fs.txt.toLowerCase()))+'</span>':
+          (d.follow?'<span class="chip due">Cobrado</span>':'<span class="chip due">Sin fecha</span>'))+
+      '</span>'+
       '<div class="t-acts">'+
         (d.status==='listo'?'':'<button class="mini" onclick="bumpDeleg(\''+d.id+'\',3)" title="Cobrar en 3 días">+3d</button>')+
+        '<button class="mini" onclick="openModal(\'deleg\',\''+d.id+'\')" title="Editar">Editar</button>'+
         '<button class="mini del" onclick="delDeleg(\''+d.id+'\')" title="Borrar">✕</button>'+
       '</div>'+
-    '</div>'+
-    '<div class="d-meta">'+
-      '<select class="status-sel '+d.status+'" onchange="setStatus(\''+d.id+'\',this.value)">'+st+'</select>'+
-      (showArea?'<span class="chip area"><span class="dot" style="background:'+a.v+'"></span>'+esc(a.name)+'</span>':'')+
-      (fs?'<span class="chip due '+fs.cls+'">'+(fs.cls==='late'?fs.txt:(fs.cls==='today'?'Cobrar hoy':'Cobrar · '+fs.txt.toLowerCase()))+'</span>':
-        (d.follow?'<span class="chip due">Cobrado</span>':'<span class="chip due">Sin fecha</span>'))+
     '</div>'+
   '</div>';
 }
@@ -2254,18 +2388,27 @@ function render(){
     const todayEv=gEvents.filter(e=>evDayKey(e)===T);
     if(todayEv.length)h+=sect('Tu agenda de hoy',todayEv.length)+wrapList(todayEv.map(evHTML).join(''));
   }
+  const closedToday=S.tasks.filter(t=>t.done&&inWS(t)&&t.doneAt===T)
+    .sort((a,b)=>(a.title||'').localeCompare(b.title||''));
   if(open.length){
     h+=sect('Tus tareas',open.length)+wrapList(sortT(open).map(taskHTML).join(''));
-  }else{
+  }else if(!closedToday.length){
     h+='<div class="empty"><b>Todo limpio</b>No tienes tareas abiertas en esta vista.</div>';
+  }
+  if(closedToday.length){
+    h+=sect('Cerradas hoy',closedToday.length)+wrapList(closedToday.map(taskHTML).join(''));
   }
   const recPend=S.recur.filter(r=>inWS(r)&&!recurGot(r.id)&&diffDays(recurDate(r),T)<=0);
   if(recPend.length){
     h+=sect('Entregas del equipo',recPend.length)+
        wrapList(recPend.sort((x,y)=>(x.day||0)-(y.day||0)).map(r=>recurHTML(r,true)).join(''));
   }
-  if(delegDue.length){
-    h+=sect('Toca cobrar',delegDue.length)+wrapList(delegDue.map(delegHTML).join(''));
+  if(delegOpen.length){
+    const ord=delegOpen.slice().sort((a,b)=>{
+      const af=a.follow||'9999-99-99', bf=b.follow||'9999-99-99';
+      return af<bf?-1:(af>bf?1:0);
+    });
+    h+=sect('Delegado',delegOpen.length)+wrapList(ord.map(delegHTML).join(''));
   }
   setHTML('hoyBody',h);
 
