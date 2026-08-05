@@ -292,7 +292,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 /* ============ TASK ============ */
 .list{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .task{
-  display:flex;align-items:center;gap:10px;padding:6px 14px;
+  display:flex;align-items:flex-start;gap:10px;padding:8px 14px;
   background:transparent;transition:background .16s,opacity .3s;
 }
 .task+.task{border-top:1px solid var(--line-2)}
@@ -301,7 +301,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .task.done{opacity:.4}
 .check{
   width:17px;height:17px;border:1.5px solid var(--dimmer);border-radius:5px;cursor:pointer;
-  flex-shrink:0;display:grid;place-items:center;background:transparent;padding:0;
+  flex-shrink:0;margin-top:1px;display:grid;place-items:center;background:transparent;padding:0;
   transition:border-color .18s,background .25s,transform .18s;
 }
 .check:hover{border-color:var(--accent);transform:scale(1.12)}
@@ -311,16 +311,16 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .check.on{background:var(--accent);border-color:var(--accent)}
 .check.on svg path{stroke-dashoffset:0;transition:stroke-dashoffset .3s cubic-bezier(.5,0,.2,1) .05s}
 .t-body{flex:1;min-width:0}
-.t-row{display:flex;align-items:center;gap:10px;min-width:0}
+.t-row{display:block;min-width:0}
 .t-title{
-  font-size:13.5px;font-weight:500;line-height:1.45;position:relative;cursor:pointer;
-  flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-size:13.5px;font-weight:500;line-height:1.4;position:relative;cursor:pointer;
+  display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .t-title:hover{text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--dimmer)}
 .task.done .t-title{color:var(--dim)}
 .task.done .t-title{text-decoration:line-through;text-decoration-thickness:1.5px}
 @keyframes strike{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
-.t-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.t-meta{display:flex;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap}
 .chip{font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
 .chip.area{background:var(--panel-2);color:var(--dim)}
 .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
@@ -342,7 +342,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
   font-size:12px;color:var(--dimmer);margin-top:1px;line-height:1.4;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.t-acts{display:flex;gap:3px;flex-shrink:0;align-items:center;opacity:.45;transition:opacity .18s}
+.t-acts{display:flex;gap:2px;flex-shrink:0;align-items:center;opacity:.45;transition:opacity .18s;margin-top:1px}
 .task:hover .t-acts,.dcard:hover .t-acts{opacity:1}
 .mini{background:transparent;border:none;color:var(--dim);cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:600;padding:4px 6px;border-radius:5px;line-height:1;transition:.15s}
 .mini:hover{color:var(--txt);background:var(--panel-2)}
@@ -364,16 +364,16 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .frow input:focus{border:none;background:transparent;box-shadow:none}
 
 /* ============ DELEG ============ */
-.dcard{background:transparent;padding:7px 14px;transition:background .16s}
+.dcard{background:transparent;padding:8px 14px;transition:background .16s}
 .dcard+.dcard{border-top:1px solid var(--line-2)}
 .dcard:hover{background:var(--panel-2)}
 .dcard.overdue{box-shadow:inset 2px 0 0 var(--red)}
 .dcard.done{opacity:.4}
-.d-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.d-what{font-size:13.5px;font-weight:500;line-height:1.45;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.d-who{font-size:12px;color:var(--dim);font-weight:500;display:inline-flex;align-items:center;gap:6px;flex-shrink:0}
+.d-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.d-what{font-size:13.5px;font-weight:500;line-height:1.4;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.d-who{font-size:11.5px;color:var(--dim);font-weight:500;display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
 .avatar{width:18px;height:18px;border-radius:50%;background:var(--txt);color:var(--bg);display:grid;place-items:center;font-size:9px;font-weight:800;flex-shrink:0}
-.d-meta{display:inline-flex;gap:6px;align-items:center;flex-shrink:0}
+.d-meta{display:flex;gap:6px;align-items:center;margin-top:4px;flex-wrap:wrap}
 .status-sel{border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;background:var(--panel-2);color:var(--dim)}
 .status-sel.progreso{border-color:var(--accent);color:var(--accent)}
 .status-sel.trabado{border-color:var(--red);color:var(--red)}
@@ -517,15 +517,15 @@ textarea{resize:vertical;min-height:64px;line-height:1.55}
 .fline.open{border-bottom:1px solid var(--focus-line)}
 
 /* ============ RECURRENTES ============ */
-.rrow{display:flex;align-items:center;gap:10px;padding:7px 14px;background:transparent;transition:background .16s}
+.rrow{display:flex;align-items:flex-start;gap:10px;padding:8px 14px;background:transparent;transition:background .16s}
 .rrow+.rrow{border-top:1px solid var(--line-2)}
 .rrow:hover{background:var(--panel-2)}
 .rrow.overdue{box-shadow:inset 2px 0 0 var(--red)}
 .rrow.got{opacity:.45}
-.r-body{flex:1;min-width:0;display:flex;align-items:center;gap:10px}
-.r-name{font-size:13.5px;font-weight:500;line-height:1.45;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r-body{flex:1;min-width:0}
+.r-name{font-size:13.5px;font-weight:500;line-height:1.4;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rrow.got .r-name{text-decoration:line-through;color:var(--dim)}
-.r-meta{display:inline-flex;align-items:center;gap:6px;flex-shrink:0}
+.r-meta{display:flex;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap}
 .chip.wait{background:var(--panel-2);color:var(--dim)}
 .chip.wait.late{background:var(--red);color:#fff;text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;font-weight:700}
 .chip.wait.now{background:var(--accent);color:#fff;text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;font-weight:700}
@@ -632,9 +632,7 @@ code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padd
   .qadd .btn{width:100%}
   .head-ctrls{width:100%;justify-content:space-between}
   .t-acts{opacity:1}
-  .t-row{flex-wrap:wrap;gap:4px}
-  .t-title{white-space:normal;flex:1 0 100%}
-  .t-meta{flex-wrap:wrap}
+  .t-title{white-space:normal;text-overflow:clip}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -2125,7 +2123,7 @@ function taskHTML(t){
     '<button class="check'+(t.done?' on':'')+'" onclick="toggleTask(\''+t.id+'\')" aria-label="Cerrar tarea">'+CHECK_SVG+'</button>'+
     '<div class="t-body">'+
       '<div class="t-row">'+
-        '<span class="t-title" onclick="openModal(\'task\',\''+t.id+'\')" title="Editar">'+highlight(t.title)+'</span>'+
+        '<span class="t-title" onclick="openModal(\'task\',\''+t.id+'\')" title="'+esc(t.title)+'">'+highlight(t.title)+'</span>'+
         '<span class="t-meta">'+
           (showArea?'<span class="chip area"><span class="dot" style="background:'+a.v+'"></span>'+esc(a.name)+'</span>':'')+
           (ds?'<span class="chip due '+ds.cls+'">'+ds.txt+'</span>':'')+
@@ -2181,14 +2179,16 @@ function delegHTML(d){
   const showArea=S.ws==='todo';
   return '<div class="'+cls+'">'+
     '<div class="d-top">'+
-      '<span class="d-what" onclick="openModal(\'deleg\',\''+d.id+'\')" style="cursor:pointer">'+esc(d.what)+'</span>'+
-      '<span class="d-who"><span class="avatar">'+esc(initials(d.who))+'</span>'+esc(d.who)+'</span>'+
-      '<span class="d-meta">'+
-        '<select class="status-sel '+d.status+'" onchange="setStatus(\''+d.id+'\',this.value)">'+st+'</select>'+
-        (showArea?'<span class="chip area"><span class="dot" style="background:'+a.v+'"></span>'+esc(a.name)+'</span>':'')+
-        (fs?'<span class="chip due '+fs.cls+'">'+(fs.cls==='late'?fs.txt:(fs.cls==='today'?'Cobrar hoy':'Cobrar · '+fs.txt.toLowerCase()))+'</span>':
-          (d.follow?'<span class="chip due">Cobrado</span>':'<span class="chip due">Sin fecha</span>'))+
-      '</span>'+
+      '<div style="flex:1;min-width:0">'+
+        '<span class="d-what" onclick="openModal(\'deleg\',\''+d.id+'\')" style="cursor:pointer" title="'+esc(d.what)+'">'+esc(d.what)+'</span>'+
+        '<div class="d-meta">'+
+          '<span class="d-who"><span class="avatar">'+esc(initials(d.who))+'</span>'+esc(d.who)+'</span>'+
+          '<select class="status-sel '+d.status+'" onchange="setStatus(\''+d.id+'\',this.value)">'+st+'</select>'+
+          (showArea?'<span class="chip area"><span class="dot" style="background:'+a.v+'"></span>'+esc(a.name)+'</span>':'')+
+          (fs?'<span class="chip due '+fs.cls+'">'+(fs.cls==='late'?fs.txt:(fs.cls==='today'?'Cobrar hoy':'Cobrar · '+fs.txt.toLowerCase()))+'</span>':
+            (d.follow?'<span class="chip due">Cobrado</span>':'<span class="chip due">Sin fecha</span>'))+
+        '</div>'+
+      '</div>'+
       '<div class="t-acts">'+
         (d.status==='listo'?'':'<button class="mini" onclick="bumpDeleg(\''+d.id+'\',3)" title="Cobrar en 3 días">+3d</button>')+
         '<button class="mini" onclick="openModal(\'deleg\',\''+d.id+'\')" title="Editar">Editar</button>'+
